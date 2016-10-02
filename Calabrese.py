@@ -56,8 +56,8 @@ def handleW(s1,p1):
     #case sibling
     elif(s1 == "sibling"):
         try:
-            ret = p1Children;
-            ret.add(p2Children);
+            ret = p1("p1Children");
+            ret.add(p1("p2Children"));
             set = set(ret);
             ret = list(set);
             ret.sort;
@@ -68,8 +68,8 @@ def handleW(s1,p1):
     #case half-sibling
     elif(s1 == "half-sibling"):
         try:
-            ret = p1Children;
-            ret.add(p2Children);
+            ret = p1("p1Children");
+            ret.add(p1("p2Children"));
             set = set(ret);
             ret = list(set);
             ret.sort;
