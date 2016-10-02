@@ -54,13 +54,55 @@ def handleW(s1,p1):
         except KeyError as e:
             return[];
     #case sibling
+    elif(s1 == "sibling"):
+        try:
+            ret = p1Children;
+            ret.add(p2Children);
+            set = set(ret);
+            ret = list(set);
+            ret.sort;
+            ret.remove(s2);
+        except KeyError as e:
+                return [];
         #get child sets of both parents, take their union :^D
+    #case half-sibling
+    elif(s1 == "half-sibling"):
+        try:
+            ret = p1Children;
+            ret.add(p2Children);
+            set = set(ret);
+            ret = list(set);
+            ret.sort;
+            ret.remove(s2);
+            for i in ret:
+                if (i["parent"][0] == (i+1)["parent"][0]):
+                    ret.remove(i);
+        except KeyError as e:
+            return [];
     #base case
     else:
         return [];
     return ret; 
 def handleX(s1,s2,s3):
-    pass;
+    #case parent
+    if (s2 == "parent"):
+        try:
+            if (s1["parent"][0] == s3 or s1["parent"][1] == s3):
+                return ("Yes");
+            else:
+                return ("No");
+        except KeyError as e:
+            return [];
+    #case spouse
+    elif (s2 == "spouse"):
+        try:
+            if (s1["spouse"] == s3):
+                return ("Yes");
+            else:
+                return ("No");
+        except KeyError as e:
+            return [];
+    #case sibling
 def handleR(s1,s2):
     pass;
 
