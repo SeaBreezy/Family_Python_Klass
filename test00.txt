@@ -1,0 +1,6 @@
+E this is my
+E first line of
+E code which should
+E compile and run
+E compile and run
+P
