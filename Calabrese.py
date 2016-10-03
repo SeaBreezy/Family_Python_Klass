@@ -24,7 +24,7 @@ def handleE3(p1,p2,p3):
     
     p2Spouses = p2Dict.setdefault("spouse",set());
     p2Spouses.add(p1);
-    p2Children = p1Dict.setdefault("children",set());
+    p2Children = p2Dict.setdefault("children",set());
     p2Children.add(p3);
     
     p3Parents = p3Dict.setdefault("parent",set());
@@ -46,7 +46,7 @@ def handleW(s1,p1):
             ret = ret["spouse"];
         except KeyError as e:
             return [];
-    
+
     #case parent
     elif(s1 == "parent"):
         try:
@@ -56,50 +56,44 @@ def handleW(s1,p1):
     #case sibling
     elif(s1 == "sibling"):
         try:
-            ret1 = p1("p1Children");
-            ret2 = p1("p2Children");
-            set1 = set(ret1);
-            set2 = set(ret2);
-            ret3 = set1.union(set2);
-            ret = list(ret3);
+            #list of strings which contain parents names
+            parents = list(ret["parent"]);
+
+            #lookup parent in family dictionary
+            #then find their children set
+            parent1 = family[parents[0]];
+            parent1children = parent1["children"];
+
+            parent2 = family[parents[1]];
+            parent2children = parent2["children"];
         except KeyError as e:
-                return [];
-        #get child sets of both parents, take their union :^D
+            return[];
+
+        #take the intersection of the two sets
+        ret = parent1children & parent2children;
+        ret.remove(p1);
     #case half-sibling
     elif(s1 == "half-sibling"):
         try:
-            ret1 = p1("p1Children");
-            ret2 = p1("p2Children");
-            set1 = set(ret1);
-            set2 = set(ret2);
-            ret3 = set1.intersect(set2);
-            ret = list(ret3);            
+            #same logic as sibling case
+            parents = list(ret["parent"]);
+           
+            parent1 = family[parents[0]];
+            parent1children = parent1["children"];
+
+            parent2 = family[parents[1]];
+            parent2children = parent2["children"];
         except KeyError as e:
-            return [];
+            return[];
+
+        #take the symmetric of the two sets
+        ret = parent1children ^ parent2children;
     #base case
     else:
         return [];
     return ret; 
 def handleX(s1,s2,s3):
-    #case parent
-    if (s2 == "parent"):
-        try:
-            if (s1["parent"][0] == s3 or s1["parent"][1] == s3):
-                return ("Yes");
-            else:
-                return ("No");
-        except KeyError as e:
-            return [];
-    #case spouse
-    elif (s2 == "spouse"):
-        try:
-            if (s1["spouse"] == s3):
-                return ("Yes");
-            else:
-                return ("No");
-        except KeyError as e:
-            return [];
-    #case sibling
+    pass;
 def handleR(s1,s2):
     pass;
 
