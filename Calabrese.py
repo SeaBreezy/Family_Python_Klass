@@ -56,27 +56,24 @@ def handleW(s1,p1):
     #case sibling
     elif(s1 == "sibling"):
         try:
-            ret = p1("p1Children");
-            ret.add(p1("p2Children"));
-            set = set(ret);
-            ret = list(set);
-            ret.sort;
-            ret.remove(s2);
+            ret1 = p1("p1Children");
+            ret2 = p1("p2Children");
+            set1 = set(ret1);
+            set2 = set(ret2);
+            ret3 = set1.union(set2);
+            ret = list(ret3);
         except KeyError as e:
                 return [];
         #get child sets of both parents, take their union :^D
     #case half-sibling
     elif(s1 == "half-sibling"):
         try:
-            ret = p1("p1Children");
-            ret.add(p1("p2Children"));
-            set = set(ret);
-            ret = list(set);
-            ret.sort;
-            ret.remove(s2);
-            for i in ret:
-                if (i["parent"][0] == (i+1)["parent"][0]):
-                    ret.remove(i);
+            ret1 = p1("p1Children");
+            ret2 = p1("p2Children");
+            set1 = set(ret1);
+            set2 = set(ret2);
+            ret3 = set1.intersect(set2);
+            ret = list(ret3);            
         except KeyError as e:
             return [];
     #base case
