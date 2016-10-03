@@ -24,7 +24,7 @@ def handleE3(p1,p2,p3):
     
     p2Spouses = p2Dict.setdefault("spouse",set());
     p2Spouses.add(p1);
-    p2Children = p1Dict.setdefault("children",set());
+    p2Children = p2Dict.setdefault("children",set());
     p2Children.add(p3);
     
     p3Parents = p3Dict.setdefault("parent",set());
@@ -46,7 +46,7 @@ def handleW(s1,p1):
             ret = ret["spouse"];
         except KeyError as e:
             return [];
-    
+
     #case parent
     elif(s1 == "parent"):
         try:
@@ -54,7 +54,40 @@ def handleW(s1,p1):
         except KeyError as e:
             return[];
     #case sibling
-        #get child sets of both parents, take their union :^D
+    elif(s1 == "sibling"):
+        try:
+            #list of strings which contain parents names
+            parents = list(ret["parent"]);
+
+            #lookup parent in family dictionary
+            #then find their children set
+            parent1 = family[parents[0]];
+            parent1children = parent1["children"];
+
+            parent2 = family[parents[1]];
+            parent2children = parent2["children"];
+        except KeyError as e:
+            return[];
+
+        #take the intersection of the two sets
+        ret = parent1children & parent2children;
+        ret.remove(p1);
+    #case half-sibling
+    elif(s1 == "half-sibling"):
+        try:
+            #same logic as sibling case
+            parents = list(ret["parent"]);
+           
+            parent1 = family[parents[0]];
+            parent1children = parent1["children"];
+
+            parent2 = family[parents[1]];
+            parent2children = parent2["children"];
+        except KeyError as e:
+            return[];
+
+        #take the symmetric of the two sets
+        ret = parent1children ^ parent2children;
     #base case
     else:
         return [];
