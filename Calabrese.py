@@ -1,3 +1,15 @@
+def recAncestors(p1):
+    #if the person exists and they have parents
+    #call recursive on their parents
+    #if they dont have parents, just return person's name
+    try:
+        person = family[p1];
+        parents = list(person["parent"]);
+    except KeyError as e:
+        return p1;
+    fullstring = p1 + " " + recAncestors(parents[0]) + " " + recAncestors(parents[1]);
+    return fullstring;
+
 #handleE
 #adds people to family and define parent child relationships
 #pXDict is a reference to dictionary of that person
@@ -88,6 +100,28 @@ def handleW(s1,p1):
 
         #take the symmetric of the two sets
         ret = parent1children ^ parent2children;
+    #case ancestor
+    elif(s1 == "ancestor"):
+        fullstring = recAncestors(p1);
+        ret = set(fullstring.split());
+        #ret should never be empty, if recAncestor is called on:
+        #a person who doesnt exist or who doesnt have parents
+        #these both return at least p1 as the name
+        ret.remove(p1);
+    elif(s1 == "cousin"):
+        #declair empty set
+        ret = set();
+        #get p1's ancestors, if there are none then they cannot have cousins
+        p1Ancestor = handleW("ancestor",p1);
+        if(not p1Ancestor):
+            return [];
+        potentialRelatives = family.keys();
+        for name in potentialRelatives:
+            relAncestor = handleW("ancestor",name);
+            #if set not empty and if there is an overlap
+            if(p1Ancestor & relAncestor):
+                ret.add(name);
+        ret.remove(p1); 
     #base case
     else:
         return [];
