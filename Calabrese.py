@@ -127,7 +127,56 @@ def handleW(s1,p1):
         return [];
     return ret; 
 def handleX(s1,s2,s3):
-    pass;
+    #case spouse
+    if (s2 == "spouse"):
+        try:
+            tmp = handleW("spouse",s3);
+            if s1 in tmp:
+                return true;
+            else:
+                return false;
+        except KeyError as e:
+            return false;
+    #case parent
+    if (s2 == "parent"):
+        try:
+            tmp = handleW("parent",s3);
+            if s1 in tmp:
+                return true;
+            else:
+                return false;
+        except KeyError as e:
+            return false;
+    #case sibling
+    if (s2 == "sibling"):
+        try:
+            tmp = handleW("sibling",s3);
+            if s1 in tmp:
+                return true;
+            else:
+                return false;
+        except KeyError as e:
+            return false;
+    #case ancestor
+    if (s2 == "ancestor"):
+        try:
+            tmp = handleW("ancestor",s3);
+            if s1 in tmp:
+                return true;
+            else:
+                return false;
+        except KeyError as e:
+            return false;
+    #case cousin
+    if (s2 == "cousin"):
+        try:
+            tmp = handleW("cousin",s3);
+            if s1 in tmp:
+                return true;
+            else:
+                return false;
+        except KeyError as e:
+            return false;
 def handleR(s1,s2):
     pass;
 
@@ -183,4 +232,4 @@ while(1):
 
     if(tokenList[0] == 'P'):
         print('P');
-        handleP();
+handleP();
