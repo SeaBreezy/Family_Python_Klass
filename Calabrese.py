@@ -129,10 +129,24 @@ def handleW(s1,p1):
 def handleX(s1,s2,s3):
         tmp = handleW(s2,s3);
         if s1 in tmp:
-            return true;
+            return True;
          else:
-            return false;
+            return False;
 def handleR(s1,s2):
+    if(handleW("spouse",s2) == True):
+        print("Spouse")
+    elif(handleW("parent",s2) == True):
+        print("Parent")
+    elif(handleW("sibling",s2) == True):
+        print("Sibling")
+    elif(handleW("half-sibling",s2) == True):
+        print("Half-Sibling")
+    elif(handleW("ancestor",s2) == True):
+        print("Ancestor")
+    elif(handleW("cousin",s2) == True):
+        print("Cousin")
+    else:
+        print("Unrelated")
     pass;
 
 #handleP
