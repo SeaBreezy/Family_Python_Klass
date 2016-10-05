@@ -127,8 +127,26 @@ def handleW(s1,p1):
         return [];
     return ret; 
 def handleX(s1,s2,s3):
-    pass;
+        tmp = handleW(s2,s3);
+        if s1 in tmp:
+            return True;
+         else:
+            return False;
 def handleR(s1,s2):
+    if(handleW("spouse",s2) == True):
+        print("Spouse")
+    elif(handleW("parent",s2) == True):
+        print("Parent")
+    elif(handleW("sibling",s2) == True):
+        print("Sibling")
+    elif(handleW("half-sibling",s2) == True):
+        print("Half-Sibling")
+    elif(handleW("ancestor",s2) == True):
+        print("Ancestor")
+    elif(handleW("cousin",s2) == True):
+        print("Cousin")
+    else:
+        print("Unrelated")
     pass;
 
 #handleP
@@ -183,4 +201,4 @@ while(1):
 
     if(tokenList[0] == 'P'):
         print('P');
-        handleP();
+handleP();
