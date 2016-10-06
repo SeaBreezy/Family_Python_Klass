@@ -22,6 +22,7 @@ def handleE2(p1,p2):
 
     p2Spouses = p2Dict.setdefault("spouse",set());
     p2Spouses.add(p1);
+    return 1;
     
 def handleE3(p1,p2,p3):
     p1Dict = family.setdefault(p1,{});
@@ -41,7 +42,7 @@ def handleE3(p1,p2,p3):
     p3Parents = p3Dict.setdefault("parent",set());
     p3Parents.add(p1);
     p3Parents.add(p2);
-    return 0;
+    return 1;
 
 def handleW(s1,p1):
     #If person exists ret = personDict
@@ -57,7 +58,6 @@ def handleW(s1,p1):
             ret = ret["spouse"];
         except KeyError as e:
             return [];
-
     #case parent
     elif(s1 == "parent"):
         try:
@@ -133,19 +133,19 @@ def handleX(s1,s2,s3):
             return False;
 def handleR(s1,s2):
     if(handleX(s1,"spouse",s2) == True):
-        print("Spouse")
+        print("Spouse");
     elif(handleX(s1,"parent",s2) == True):
-        print("Parent")
+        print("Parent");
     elif(handleX(s1,"sibling",s2) == True):
-        print("Sibling")
+        print("Sibling");
     elif(handleX(s1,"half-sibling",s2) == True):
-        print("half-Sibling")
+        print("half-Sibling");
     elif(handleX(s1,"ancestor",s2) == True):
-        print("Ancestor")
+        print("Ancestor");
     elif(handleX(s1,"cousin",s2) == True):
-        print("Cousin")
+        print("Cousin");
     else:
-        print("Unrelated")
+        print("Unrelated");
     print("");
     return 1;
 
@@ -176,11 +176,11 @@ while(1):
     tokenList = s.split();
 
     #determine query case
-    if(tokenList[0] == 'E' and len(tokenList) == 3):
-        handleE2(tokenList[1],tokenList[2]);
-
     if(tokenList[0] == 'E' and len(tokenList) == 4):
         handleE3(tokenList[1],tokenList[2],tokenList[3]);
+
+    if(tokenList[0] == 'E' and len(tokenList) == 3):
+        handleE2(tokenList[1],tokenList[2]);
 
     if(tokenList[0] == 'R'):
         print(s);
@@ -202,6 +202,6 @@ while(1):
             print(i);
         print('');
 
-    if(tokenList[0] == 'P'):
-        print('P');
-        handleP();
+    #if(tokenList[0] == 'P'):
+    #    print('P');
+    #    handleP();
