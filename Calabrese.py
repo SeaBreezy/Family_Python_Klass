@@ -24,7 +24,6 @@ def handleE2(p1,p2):
     p2Spouses.add(p1);
     
 def handleE3(p1,p2,p3):
-    print(p1 + ' ' + p2 + ' ' + p3);
     p1Dict = family.setdefault(p1,{});
     p2Dict = family.setdefault(p2,{});
     p3Dict = family.setdefault(p3,{});
@@ -130,24 +129,25 @@ def handleX(s1,s2,s3):
         tmp = handleW(s2,s3);
         if s1 in tmp:
             return True;
-         else:
+        else:
             return False;
 def handleR(s1,s2):
-    if(handleW("spouse",s2) == True):
+    if(handleX(s1,"spouse",s2) == True):
         print("Spouse")
-    elif(handleW("parent",s2) == True):
+    elif(handleX(s1,"parent",s2) == True):
         print("Parent")
-    elif(handleW("sibling",s2) == True):
+    elif(handleX(s1,"sibling",s2) == True):
         print("Sibling")
-    elif(handleW("half-sibling",s2) == True):
-        print("Half-Sibling")
-    elif(handleW("ancestor",s2) == True):
+    elif(handleX(s1,"half-sibling",s2) == True):
+        print("half-Sibling")
+    elif(handleX(s1,"ancestor",s2) == True):
         print("Ancestor")
-    elif(handleW("cousin",s2) == True):
+    elif(handleX(s1,"cousin",s2) == True):
         print("Cousin")
     else:
         print("Unrelated")
-    pass;
+    print("");
+    return 1;
 
 #handleP
 #a debugging tool that prints out contents of each member of the family when called
@@ -177,20 +177,22 @@ while(1):
 
     #determine query case
     if(tokenList[0] == 'E' and len(tokenList) == 3):
-        print('E2');
         handleE2(tokenList[1],tokenList[2]);
 
     if(tokenList[0] == 'E' and len(tokenList) == 4):
-        print('E3');
         handleE3(tokenList[1],tokenList[2],tokenList[3]);
 
     if(tokenList[0] == 'R'):
-        print('R');
-        #handleX
+        print(s);
+        handleR(tokenList[1],tokenList[2]);
 
     if(tokenList[0] == 'X'):
-        print('X');
-        #handleX
+        print(s);
+        if(handleX(tokenList[1],tokenList[2],tokenList[3])):
+            print("Yes\n");
+        else:
+            print("No\n");
+        
 
     if(tokenList[0] == 'W'):
         print('W '+ tokenList[1] +' '+tokenList[2]);
@@ -198,7 +200,8 @@ while(1):
         val = sorted(val);
         for i in val:
             print(i);
+        print('');
 
     if(tokenList[0] == 'P'):
         print('P');
-handleP();
+        handleP();
